@@ -16,5 +16,8 @@
         "cmd": {
             "type": "std_msgs/Bool"
         }
-    }
+    },
+    "dependencies": [
+        {"type": "git", "url": "http://github.com/OpenAgInitiative/openag_firmware_module.git"}
+    ]
 }

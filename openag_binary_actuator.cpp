@@ -8,6 +8,12 @@ BinaryActuator::BinaryActuator(int pin, bool is_active_low) {
 
 void BinaryActuator::begin() {
   pinMode(_pin, OUTPUT);
+  if (_is_active_low) {
+    digitalWrite(_pin, HIGH);
+  }
+  else {
+    digitalWrite(_pin, LOW);
+  }
 }
 
 void BinaryActuator::update() {

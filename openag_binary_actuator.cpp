@@ -4,6 +4,9 @@ BinaryActuator::BinaryActuator(int pin, bool is_active_low) {
   _pin = pin;
   _is_active_low = is_active_low;
   _last_cmd = 0;
+  status_level = OK;
+  status_code = CODE_OK;
+  status_msg = "";
 }
 
 void BinaryActuator::begin() {

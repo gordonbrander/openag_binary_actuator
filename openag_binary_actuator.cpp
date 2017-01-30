@@ -12,10 +12,10 @@ BinaryActuator::BinaryActuator(int pin, bool is_active_low) {
 void BinaryActuator::begin() {
   pinMode(_pin, OUTPUT);
   if (_is_active_low) {
-    digitalWrite(_pin, HIGH);
+    digitalWrite(_pin, LOW);
   }
   else {
-    digitalWrite(_pin, LOW);
+    digitalWrite(_pin, HIGH);
   }
 }
 
@@ -23,10 +23,10 @@ void BinaryActuator::update() {
   uint32_t curr_time = millis();
   if ((curr_time - _last_cmd) > _max_update_interval) {
     if (_is_active_low) {
-      digitalWrite(_pin, HIGH);
+      digitalWrite(_pin, LOW);
     }
     else {
-      digitalWrite(_pin, LOW);
+      digitalWrite(_pin, HIGH);
     }
   }
 }
@@ -34,9 +34,9 @@ void BinaryActuator::update() {
 void BinaryActuator::set_cmd(std_msgs::Bool cmd) {
   _last_cmd = millis();
   if (cmd.data ^ _is_active_low) {
-    digitalWrite(_pin, HIGH);
+    digitalWrite(_pin, LOW);
   }
   else {
-    digitalWrite(_pin, LOW);
+    digitalWrite(_pin, HIGH);
   }
 }

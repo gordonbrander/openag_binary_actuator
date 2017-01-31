@@ -1,8 +1,9 @@
 #include "openag_binary_actuator.h"
 
-BinaryActuator::BinaryActuator(int pin, bool is_active_low) {
+BinaryActuator::BinaryActuator(int pin, bool is_active_low, int shutoff_ms) {
   _pin = pin;
   _is_active_low = is_active_low;
+  _shutoff_ms = shutoff_ms;
   _last_cmd = 0;
   status_level = OK;
   status_code = CODE_OK;
@@ -21,7 +22,7 @@ void BinaryActuator::begin() {
 
 void BinaryActuator::update() {
   uint32_t curr_time = millis();
-  if ((curr_time - _last_cmd) > _max_update_interval) {
+  if ((curr_time - _last_cmd) > _shutoff_ms) {
     if (_is_active_low) {
       digitalWrite(_pin, HIGH);
     }
